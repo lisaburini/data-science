@@ -17,3 +17,59 @@ rules:
   - intent: bot_challenge
   - action: utter_iamabot
 
+- rule: Say 'Mi dispiace, spiegami meglio come posso esserti utile' anytime the user is sad
+  steps:
+  - intent: mood_unhappy
+  - action: utter_mood_unhappy
+
+- rule: Apologise anytime the user is angry
+  steps:
+  - intent: attack
+  - action: utter_attack
+
+
+- rule: Bot is happy that the user is satisfied
+  steps:
+  - intent: mood_great
+  - action: utter_mood_great
+
+
+- rule: submitOK
+  steps:
+  - intent: submit
+  - action: utter_submit
+
+- rule: submitNO
+  steps:
+  - intent: not_submit
+  - action: utter_not_submit
+
+- rule: ask
+  steps:
+  - intent: insert_report
+  - action: utter_ask_confirm
+
+- rule: specify the domain of the bot
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+
+- rule: provide information about employees
+  steps:
+  - intent: employees_info
+  - action: utter_employees_info
+
+- rule: name ok
+  steps:
+  - intent: insert_name
+  - action: utter_insert_name
+
+
+- rule: surname ok
+  steps:
+  - intent: insert_surname
+  - action: utter_insert_surname
+  
+
+
+

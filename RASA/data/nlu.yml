@@ -1,6 +1,18 @@
 version: "3.1"
 
 nlu:
+
+- intent: start
+  examples: |
+    - start
+    - open
+    - inizia
+    - inizio
+    - avvio
+    - go
+    - vai
+
+
 - intent: greet
   examples: |
     - hey
@@ -13,16 +25,21 @@ nlu:
     - buona sera
     - buon pomeriggio
     - eccoci
+    - ohi
     - bella
     
 
 - intent: goodbye
   examples: |
     - bye
+    - byee
     - bye bye
     - arrivederci
     - a presto
     - buona giornata
+    - buongiorno
+    - buon pomeriggio
+    - salve
     - buona serata
     - alla prossima
     - a dopo
@@ -77,7 +94,8 @@ nlu:
     - fantastico
     - stupendo
     - top
-    - perfettissimo
+    - perfetto
+    - ottimo
     - benissimo
     - meraviglioso
 
@@ -124,7 +142,9 @@ nlu:
 
 - intent: employees_info
   examples: |
-    - a chi posso chiamare?
+    - chi posso chiamare?
+    - come faccio per riuscire a contattare un operatore
+    - voglio parlare con una persona
     - vorrei parlare con qualcuno
     - vorrei parlare con un operatore
     - voglio chiamare 
@@ -144,6 +164,7 @@ nlu:
     - quali sono gli orari di apertura al pubblico?
     - in che giorni siete aperti?
     - quando posso venire?
+    - mi dici gli orari?
 
 - intent: help
   examples: |
@@ -157,15 +178,6 @@ nlu:
     - aiuto
     - aiutami
 
-- intent: start
-  examples: |
-    - start
-    - open
-    - inizia
-    - inizio
-    - avvio
-    - go
-    - vai
 
 - intent: stop
   examples: |
@@ -178,6 +190,7 @@ nlu:
     - ho finito
     - non ho più niente da chiedere
     - ho concluso
+    - ok grazie
   
 - intent: out_of_scope
   examples: |
@@ -196,6 +209,7 @@ nlu:
     - smdcspkèsj
     - ho voglia di chiacchierare un po'
     - come stai?
+    - raccontami una barzelletta
 
 - intent: attack
   examples: |
@@ -206,8 +220,62 @@ nlu:
     - muovetevi
     - non è possibile che ancora non avete risolto
 
+- intent: submit
+  examples: |
+    - invia
+    - confermo la segnalazione
+    - i dati sono corretti
+    - vorrei inviare la segnalazione
+    - sì, confermo e invio
+    - sì
+    - si
+    - yes
+    - confermo tutto
+
+- intent: not_submit
+  examples: |
+    - no
+    - annulla la segnalazione
+    - i dati sono errati, voglio annullare
+    - ho sbagliato
+    - ho risolto, annullo
+    - problema risolto
+    - annulla
+    - voglio tornare indietro
+    - cancella
+
 - synonym: segnalazione
   examples: |
     - problema
     - report
   
+
+- intent: insert_description
+  examples: |
+    - [descrizione](description)
+
+- intent: insert_location
+  examples: |
+    - è successo in [Via Ancona 1](location)
+
+- intent: insert_name
+  examples: |
+    - mi chiamo [Anna](name)
+    - sono [Lisa](name)
+    - il mio nome è [Marco](name)
+  
+- intent: insert_surname
+  examples: |
+    - [Rossi](surname)
+    - è [Bianchi](surname)
+    - il mio cognome è [Verdi](surname)
+
+- intent: insert_phone_number
+  examples: |
+    - [3331112234](phone_number)
+    - è [3456789234](phone_number)
+
+
+- intent: insert_email
+  examples: |
+    - [lara.r@gmail.com](email)

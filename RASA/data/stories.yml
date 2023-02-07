@@ -2,29 +2,71 @@ version: "3.1"
 
 stories:
 
-- story: happy path
+- story: happy_path
   steps:
   - intent: greet
   - action: utter_greet
   - intent: mood_great
-  - action: utter_happy
+  - action: utter_mood_great
+  - intent: goodbye
+  - action: utter_goodbye
 
-- story: sad path 1
+- story: sad_path1
   steps:
   - intent: greet
   - action: utter_greet
   - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
+  - action: utter_mood_unhappy
+#da finire
+
+  #- intent: affirm
+  #- action: utter_happy
+
+
+- story: sad_path2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_mood_unhappy
+  - intent: check_status_report
+  # da finire
+
+
+- story: info_happy
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: office_info
+  #- action: 
+  - action: utter_useful
   - intent: affirm
   - action: utter_happy
+  - intent: goodbye
+  - action: utter_goodbye
 
-- story: sad path 2
+- story: info_happy2
   steps:
   - intent: greet
   - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
+  - intent: office_info
+  #- action: 
+  - action: utter_useful
+  - intent: affirm
+  - action: utter_mood_great
+  - intent: goodbye
   - action: utter_goodbye
+
+
+
+
+- story: confirm
+  steps:
+ 
+  - intent: greet
+  - action: utter_greet
+  - intent: insert_report
+   #da completare
+  - action: utter_ask_confirm
+  - intent: submit
+  - action: utter_submit

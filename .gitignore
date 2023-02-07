@@ -11,3 +11,4 @@ NetworkX/email-Eu-core-department-labels.txt
 RASA/.rasa/cache/
 RASA/.rasa/cache/cache.db
 RASA/models/
+RASA/ngrok.exe

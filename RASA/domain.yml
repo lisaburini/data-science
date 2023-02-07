@@ -1,6 +1,7 @@
 version: "3.1"
 
 intents:
+  - start
   - greet
   - goodbye
   - affirm
@@ -8,27 +9,80 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
+  - insert_report
+  - check_status_report
+  - employees_info
+  - office_info
+  - help
+  - stop
   - out_of_scope
   - attack
-  - stop
-  - start
-  - help
-  - office_info
-  - employees_info
-  - check_status_report
-  - insert_report
+  - submit
+  - not_submit
+  - insert_name
+  - insert_surname
+  - insert_phone_number
+  - insert_email
+  - insert_description
+  - insert_location
+  
 
+entities:
+- description
+- location
+- name
+- surname
+- phone_number
+- email
+slots:
+  description:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: description
+  location:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: location
+  name:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: name
+  surname:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: surname
+  phone_number:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: phone_number
+  email:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: email
+  
+
+
+  
 responses:
   
   utter_start:
-  - text: "Procediamo"
-  - text: "Benvenuto"
-  - text: "Ci siamo"
+  - text: "Benvenuto gentile cittadino. Io sono comuBot, il bot che raccoglierà le tue segnalazioni nel settore 'lavori pubblici'. Spiegami qual è il problema."
 
   utter_greet:
-  - text: "Salve"
-  - text: "Buongiorno"
-  - text: "Benevenuto nel nostro servizio"
+  - text: "Salve, come posso aiutarti?"
+  - text: "Buongiorno, sono a tua disposizione."
 
   utter_goodbye:
   - text: "Arrivederci"
@@ -36,18 +90,54 @@ responses:
   - text: "Buon proseguimento di giornata"
   - text: "Grazie di averci contattato"
 
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-  - text: "Did that help you?"
+  utter_mood_unhappy:
+  - text: "Mi dispiace, spiegami meglio come posso esserti utile"
+  
+  utter_mood_great:
+  - text: "Molto bene, sono soddisfatto per aver portato a termine il mio lavoro"
 
   utter_happy:
-  - text: "Great, carry on!"
+  - text: "Ne sono lieto. Scrivimi pure tutte le volte che ne hai bisogno"
+  - text: "Risolvere i problemi dei cittadini è il mio lavoro, sono felice di essere utile"
 
   utter_iamabot:
-  - text: "Sono un bot, non un essere umano."
+  - text: "Sono un bot"
+
+  utter_out_of_scope:
+  - text: "Scusami, non ho compreso le tue intenzioni. Ecco qui una lista delle attività di mia competenza:\n-Ricevere una segnalazione\n-Dare informazioni sullo stato di una segnalazione\n-Fornire informazioni inerenti al settore 'lavori pubblici'"
+
+  utter_useful:
+  - text: "Ho risposto correttamente alla tua domanda?"
+  - text: "Ho fornito le informazioni richieste?"
+
+  utter_attack:
+  - text: "Sto facendo il possibile. Per parlare con un operatore fare riferimento al seguente numero: 0000000000"
+
+  utter_employees_info:
+  - text: "Seleziona il settore di interesse:"
+  #bottoni con le categorie
+
+  utter_insert_report:
+  - text: "Bene: inserisci la descrizione della segnalazione"
+
+
+
+  utter_ask_confirm:
+  - text: "Si vuole procedere e registrare la segnalazione?"
+  - text: "Posso inviare la segnalazione?"
+
+  utter_submit:
+  - text: "Ho registrato la segnalazione nel sistema. Sarà presa in carico al più presto. Ti ringraziamo."
+
+  utter_not_submit:
+  - text: "La segnalazione non è stata salvata."
+
+  utter_insert_name:
+  - text: "Il tuo nome è {name}"
+
+  utter_insert_surname:
+  - text: "Il tuo cognome è {surname}"
+
 
 session_config:
   session_expiration_time: 60
