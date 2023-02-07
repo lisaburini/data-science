@@ -8,12 +8,33 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
+  - out_of_scope
+  - attack
+  - stop
+  - start
+  - help
+  - office_info
+  - employees_info
+  - check_status_report
+  - insert_report
 
 responses:
+  
+  utter_start:
+  - text: "Procediamo"
+  - text: "Benvenuto"
+  - text: "Ci siamo"
+
   utter_greet:
-  - text: "Hey! How are you?"
-  - text: "Hi buddy, how are you?"
-  - text: "Hi bro, all right?"
+  - text: "Salve"
+  - text: "Buongiorno"
+  - text: "Benevenuto nel nostro servizio"
+
+  utter_goodbye:
+  - text: "Arrivederci"
+  - text: "Arrivederla"
+  - text: "Buon proseguimento di giornata"
+  - text: "Grazie di averci contattato"
 
   utter_cheer_up:
   - text: "Here is something to cheer you up:"
@@ -25,11 +46,8 @@ responses:
   utter_happy:
   - text: "Great, carry on!"
 
-  utter_goodbye:
-  - text: "Bye"
-
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  - text: "Sono un bot, non un essere umano."
 
 session_config:
   session_expiration_time: 60

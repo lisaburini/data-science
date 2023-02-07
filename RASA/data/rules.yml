@@ -2,6 +2,11 @@ version: "3.1"
 
 rules:
 
+- rule: Start conversation
+  steps:
+  - intent: start
+  - action: utter_start
+
 - rule: Say goodbye anytime the user says goodbye
   steps:
   - intent: goodbye
@@ -11,3 +16,4 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
