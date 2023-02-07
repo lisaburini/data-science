@@ -4,88 +4,210 @@ nlu:
 - intent: greet
   examples: |
     - hey
-    - hello
-    - hi
-    - hello there
-    - good morning
-    - good evening
-    - moin
-    - hey there
-    - let's go
-    - hey dude
-    - goodmorning
-    - goodevening
-    - good afternoon
+    - ciao
+    - salve
+    - buongiorno
+    - buonasera
+    - giorno
+    - buon giorno
+    - buona sera
+    - buon pomeriggio
+    - eccoci
+    - bella
+    
 
 - intent: goodbye
   examples: |
-    - cu
-    - good by
-    - cee you later
-    - good night
     - bye
-    - goodbye
-    - have a nice day
-    - see you around
     - bye bye
-    - see you later
+    - arrivederci
+    - a presto
+    - buona giornata
+    - buona serata
+    - alla prossima
+    - a dopo
+    - ci vediamo
+    - ci sentiamo
+    - buonanotte
+    - a domani
+    - a più tardi
+ 
 
 - intent: affirm
   examples: |
     - yes
     - y
-    - indeed
-    - of course
-    - that sounds good
-    - correct
+    - sì
+    - si
+    - s
+    - certamente
+    - certo
+    - suona bene
+    - corretto
+    - è corretto
+    - senz'altro
+    - va bene
+    - ok
+    - come no
+    - ovviamente
+    - ottimo
+    - giusto
+    - è giusto
+    - esatto
+    - perfetto
 
 - intent: deny
   examples: |
     - no
     - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
+    - mai
+    - non credo
+    - non penso
+    - non penso proprio
+    - non mi piace
+    - sicuramente no
+    - veramente no
+    - proprio no
+    - assolutamente no
 
 - intent: mood_great
   examples: |
-    - perfect
-    - great
-    - amazing
-    - feeling like a king
-    - wonderful
-    - I am feeling very good
-    - I am great
-    - I am amazing
-    - I am going to save the world
-    - super stoked
-    - extremely good
-    - so so perfect
-    - so good
-    - so perfect
+    - grandissimo
+    - grande
+    - fantastico
+    - stupendo
+    - top
+    - perfettissimo
+    - benissimo
+    - meraviglioso
 
 - intent: mood_unhappy
   examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
-    - so sad
+    - non concordo
+    - sono triste
+    - sono arrabbiato
+    - non va bene
+    - triste
+    - molto triste
+    - per niente bene
+    - non funziona niente
+    - informazioni irreperibili
+    - impossibile parlare con qualcuno
 
 - intent: bot_challenge
   examples: |
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?
+    - sei un bot?
+    - sei un umano?
+    - sei una persona?
+    - sto parlando a un bot?
+    - sto parlando con un bot?
+    - sto parlando ad una persona?
+    - sto parlando con una persona?
+
+- intent: insert_report
+  examples: |
+    - vorrei fare una segnalazione
+    - vorrei comunicare un problema
+    - c'è un problema
+    - dovete intervenire
+    - vi segnalo che
+    - devo comunicarvi che
+
+- intent: check_status_report
+  examples: |
+    - vorrei controllare lo stato di una segnalazione
+    - controllare segnalazione
+    - vorrei sapere se la mia segnalazione è stata completata
+    - il mio problema è stato risolto?
+    - il problema segnalato è stato preso in carico?
+    - a che punto sono i lavori?
+
+- intent: employees_info
+  examples: |
+    - a chi posso chiamare?
+    - vorrei parlare con qualcuno
+    - vorrei parlare con un operatore
+    - voglio chiamare 
+    - voglio mandare un'email
+    - ho bisogno di un numero di telefono
+    - mi serve un indirizzo email
+    - con chi posso parlare?
+
+- intent: office_info
+  examples: |
+    - quando siete aperti?
+    - dove si trova l'ufficio?
+    - dove vi trovate?
+    - dov'è l'ufficio dei lavori pubblici?
+    - dove posso trovarvi?
+    - a che ora aprite?
+    - quali sono gli orari di apertura al pubblico?
+    - in che giorni siete aperti?
+    - quando posso venire?
+
+- intent: help
+  examples: |
+    - cosa posso chiederti?
+    - quali sono le tue funzioni?
+    - cosa sai fare?
+    - che domande posso farti?
+    - come puoi aiutarmi?
+    - ho bisogno del tuo aiuto
+    - help
+    - aiuto
+    - aiutami
+
+- intent: start
+  examples: |
+    - start
+    - open
+    - inizia
+    - inizio
+    - avvio
+    - go
+    - vai
+
+- intent: stop
+  examples: |
+    - chiudi
+    - chiuditi
+    - basta
+    - fermati
+    - spegni
+    - stop
+    - ho finito
+    - non ho più niente da chiedere
+    - ho concluso
+  
+- intent: out_of_scope
+  examples: |
+    - blablabla
+    - sadasdasdasd
+    - hmmmmm
+    - hahahahhaha
+    - i'm sleeping
+    - che tempo fa oggi?
+    - aeijfpvefvkèdlv
+    - lmlmlmlm
+    - uecwjeèqrpo
+    - aaaaaaaaaaaa
+    - pppppppppp
+    - kkkkkkk
+    - smdcspkèsj
+    - ho voglia di chiacchierare un po'
+    - come stai?
+
+- intent: attack
+  examples: |
+    - siete nullafacenti
+    - non fate nulla
+    - non lavorate
+    - vi dovete sbrigare
+    - muovetevi
+    - non è possibile che ancora non avete risolto
+
+- synonym: segnalazione
+  examples: |
+    - problema
+    - report
+  
