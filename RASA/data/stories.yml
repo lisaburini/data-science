@@ -29,7 +29,7 @@ stories:
   - action: utter_greet
   - intent: mood_unhappy
   - action: utter_mood_unhappy
-  - intent: check_status_report
+  # - intent: check_status_report
   # da finire
 
 
@@ -57,9 +57,6 @@ stories:
   - intent: goodbye
   - action: utter_goodbye
 
-
-
-
 - story: confirm
   steps:
  
@@ -70,3 +67,30 @@ stories:
   - action: utter_ask_confirm
   - intent: submit
   - action: utter_submit
+
+
+- story: check_report_happy
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: check_status_report
+  - action: utter_ask_report_id
+  - action: check_status_form
+  - active_loop: check_status_form
+  - slot_was_set:
+    - requested_slot: report_id
+  - active_loop: null
+  - action: utter_confirm_id
+  - action: check_status_db
+  # - action: utter_useful
+  # - intent: affirm
+  # - action: utter_mood_great
+  # - intent: goodbye
+  # - action: utter_goodbye
+
+- story: ask help
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: help
+  - action: utter_help

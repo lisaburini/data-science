@@ -16,39 +16,34 @@ nlu:
 - intent: greet
   examples: |
     - hey
+    - ei
+    - ehi
     - ciao
     - salve
     - buongiorno
     - buonasera
     - giorno
     - buon giorno
+    - buona giornata
     - buona sera
     - buon pomeriggio
     - eccoci
     - ohi
-    - bella
-    
-
-- intent: goodbye
-  examples: |
-    - bye
-    - byee
-    - bye bye
-    - arrivederci
-    - a presto
-    - buona giornata
-    - buongiorno
-    - buon pomeriggio
-    - salve
-    - buona serata
-    - alla prossima
-    - a dopo
-    - ci vediamo
-    - ci sentiamo
-    - buonanotte
-    - a domani
-    - a più tardi
  
+ - intent: goodbye
+    examples: |
+      - bye
+      - byee
+      - bye bye
+      - arrivederci
+      - a presto
+      - alla prossima
+      - a dopo
+      - ci vediamo
+      - ci sentiamo
+      - buonanotte
+      - a domani
+      - a più tardi
 
 - intent: affirm
   examples: |
@@ -177,6 +172,8 @@ nlu:
     - help
     - aiuto
     - aiutami
+    - cosa posso fare?
+    - cosa posso fare in questa chat?
 
 
 - intent: stop
@@ -231,6 +228,10 @@ nlu:
     - si
     - yes
     - confermo tutto
+    - si grazie
+    - sì, grazie
+    - sì perfavore
+    - sì per favore
 
 - intent: not_submit
   examples: |

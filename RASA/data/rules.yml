@@ -69,6 +69,29 @@ rules:
   steps:
   - intent: insert_surname
   - action: utter_insert_surname
+
+# rules for form to ask report id
+- rule: Activate form report id
+  steps:
+  - intent: check_status_report
+  - action: utter_ask_report_id
+  - action: check_status_form
+  - active_loop: check_status_form
+
+- rule: Submit form
+  condition:
+  - active_loop: check_status_form
+  steps:
+  - action: check_status_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_confirm_id
+  - action: check_status_db
+
+
+
+
   
 
 
