@@ -95,7 +95,7 @@ slots:
 responses:
   
   utter_start:
-  - text: "Benvenuto gentile cittadino. Io sono comuBot, il bot che raccoglierà le tue segnalazioni nel settore 'lavori pubblici'. Spiegami qual è il problema."
+  - text: "Benvenuto gentile cittadino. Io sono comunBot, il bot che mette in comunicazione i cittadini con il Comune di Montemarciano per raccogliere segnalazioni o dare informazioni sulle stesse."
 
   utter_greet:
   - text: "Salve, come posso aiutarti?"
@@ -128,7 +128,7 @@ responses:
   - text: "Ho fornito le informazioni richieste?"
 
   utter_attack:
-  - text: "Sto facendo il possibile. Per parlare con un operatore fare riferimento al seguente numero: 0000000000"
+  - text: "I nostri operatori stanno facendo il possibile. Prova a ricontattarci a breve"
 
   utter_employees_info:
   - text: "Seleziona il settore di interesse:"
@@ -136,8 +136,6 @@ responses:
 
   utter_insert_report:
   - text: "Bene: inserisci la descrizione della segnalazione"
-
-
 
   utter_ask_confirm:
   - text: "Si vuole procedere e registrare la segnalazione?"
@@ -160,6 +158,11 @@ responses:
 
   utter_confirm_id:
   - text: "Perfetto. Ora controllerò lo stato della segnalazione numero {report_id}."
+
+  utter_help:
+  - text: "Ecco qui una lista delle attività di mia competenza:\n-Ricevere una segnalazione\n-Dare informazioni sullo stato di una segnalazione\n-Fornire informazioni inerenti al settore 'lavori pubblici'"
+
+
 
 actions:
   - check_status_db

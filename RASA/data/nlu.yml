@@ -30,20 +30,20 @@ nlu:
     - eccoci
     - ohi
  
- - intent: goodbye
-    examples: |
-      - bye
-      - byee
-      - bye bye
-      - arrivederci
-      - a presto
-      - alla prossima
-      - a dopo
-      - ci vediamo
-      - ci sentiamo
-      - buonanotte
-      - a domani
-      - a più tardi
+- intent: goodbye
+  examples: |
+    - bye
+    - byee
+    - bye bye
+    - arrivederci
+    - a presto
+    - alla prossima
+    - a dopo
+    - ci vediamo
+    - ci sentiamo
+    - buonanotte
+    - a domani
+    - a più tardi
 
 - intent: affirm
   examples: |

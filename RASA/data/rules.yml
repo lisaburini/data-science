@@ -89,7 +89,11 @@ rules:
   - action: utter_confirm_id
   - action: check_status_db
 
-
+# rule for fallback
+- rule: Ask to rephrase
+  steps:
+  - intent: nlu_fallback
+  - action: utter_out_of_scope
 
 
   
