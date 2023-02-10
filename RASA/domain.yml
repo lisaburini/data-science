@@ -167,8 +167,8 @@ responses:
   utter_ask_report_id:
   - text: "Qual è l'id della segnalazione di cui vuole controllare lo stato?"
 
-  utter_confirm_id:
-  - text: "Perfetto. Ora controllerò lo stato della segnalazione numero {report_id}."
+  # utter_confirm_id:
+  # - text: "Perfetto. Ora controllerò lo stato della segnalazione numero {report_id}."
 
   utter_help:
   - text: "Ecco qui una lista delle attività di mia competenza:\n-Ricevere una segnalazione\n-Dare informazioni sullo stato di una segnalazione\n-Fornire informazioni inerenti al settore 'lavori pubblici'"
