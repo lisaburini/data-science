@@ -13,6 +13,7 @@ intents:
   - check_status_report
   - employees_info
   - office_info
+  - specific_office_info
   - help
   - stop
   - out_of_scope
@@ -36,12 +37,17 @@ entities:
   - email
   - report_id
   - office
+  - specific_area
+  - employee_area
 
 forms:
   check_status_form:
     required_slots:
       - report_id
   office_info_form:
+    required_slots:
+      - office
+  employee_info_form:
     required_slots:
       - office
 
@@ -100,12 +106,29 @@ slots:
       conditions:
           - active_loop: office_info_form
             requested_slot: office
-        
+          - active_loop: employee_info_form
+            requested_slot: office
+  
+  specific_area:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: specific_area
+
+  employee_area:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      conditions:
+          - active_loop: employee_info_form
+            requested_slot: employee_area
   
 responses:
   
   utter_start:
-  - text: "Benvenuto gentile cittadino. Io sono comunBot, il bot che mette in comunicazione i cittadini con il Comune di Montemarciano per raccogliere segnalazioni o dare informazioni sulle stesse."
+  - text: "Benvenuto gentile cittadino. Io sono comunBot, il bot che mette in comunicazione i cittadini con il Comune di Montemarciano per raccogliere segnalazioni e dare informazioni."
 
   utter_greet:
   - text: "Salve, come posso aiutarti?"
@@ -181,27 +204,40 @@ responses:
   - text: "Quale area del settore 'Lavori Pubblici' le interessa?"
     buttons:
     - title: "Edilizia"
-      # payload: /office_info{{"office":"Edilizia"}}
       payload: Edilizia
     - title: "Luce"
-      # payload: /office_info{{"office":"Pubblica Illuminazione"}}
       payload: Pubblica Illuminazione
     - title: "Idraulica"
-      # payload: /office_info{{"office":"Termoidraulica"}}
       payload: Termoidraulica
     - title: "Verde"
-      # payload: /office_info{{"office":"Verde Pubblico"}}
       payload: Verde Pubblico
     - title: "Viabilità"
-      # payload: /office_info{{"office":"Viabilità"}}
       payload: Viabilità
+
+  utter_ask_employee_area:
+  - text: "Quale area del settore 'Lavori Pubblici' le interessa?"
+    buttons:
+    - title: "Edilizia"
+      payload: Edilizia
+    - title: "Luce"
+      payload: Pubblica Illuminazione
+    - title: "Idraulica"
+      payload: Termoidraulica
+    - title: "Verde"
+      payload: Verde Pubblico
+    - title: "Viabilità"
+      payload: Viabilità      
 
 
 actions:
   - validate_check_status_form
   - check_status_db
   - get_office_info
+  - get_specific_office_info
+  - get_employees_info
+
 
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+

@@ -11,6 +11,7 @@ rules:
   steps:
   - intent: goodbye
   - action: utter_goodbye
+  - action: action_restart
 
 - rule: Say 'I am a bot' anytime the user challenges
   steps:
@@ -54,10 +55,6 @@ rules:
   - intent: out_of_scope
   - action: utter_out_of_scope
 
-- rule: provide information about employees
-  steps:
-  - intent: employees_info
-  - action: utter_employees_info
 
 - rule: name ok
   steps:
@@ -114,8 +111,37 @@ rules:
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
+  # wait_for_user_input: false
   - action: get_office_info
+  # - action: get_employees_info
   - action: utter_ask_other
 
+# rule to get specific office info
+- rule: get specific office info
+  steps:
+  - intent: specific_office_info
+    entities:
+    - entity_name: specific_area
+  - action: get_specific_office_info
+  - action: utter_ask_other
 
+# rule to get employee info
+- rule: Activate form employee info
+  steps:
+  - intent: employees_info
+  # - action: utter_ask_office
+  - action: employee_info_form
+  - active_loop: employee_info_form
 
+- rule: Submit form
+  condition:
+  - active_loop: employee_info_form
+  steps:
+  - action: employee_info_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # wait_for_user_input: false
+  - action: get_employees_info
+  # - action: get_employees_info
+  - action: utter_ask_other

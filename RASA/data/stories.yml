@@ -10,6 +10,7 @@ stories:
   - action: utter_mood_great
   - intent: goodbye
   - action: utter_goodbye
+  - action: action_restart
 
 - story: sad_path1
   steps:
@@ -65,36 +66,8 @@ stories:
   - action: utter_mood_great
   - intent: goodbye
   - action: utter_goodbye
-
+  - action: action_restart
   
-#- story: check_report_error
-#  steps:
-# - intent: greet
-#  - action: utter_greet
-#  - intent: check_status_report # mio problema stato risolto?
-#  # - action: utter_ask_report_id
-#  - action: check_status_form
-#  - active_loop: check_status_form
-#  - slot_was_set:
-#    - requested_slot: report_id
-#  - active_loop: null
-#  - action: utter_confirm_id
-#  - action: check_status_db # id scorretto
-#  - action: utter_ask_other
-#  - intent: check_status_report # mio problema stato risolto?
-#  # - action: utter_ask_report_id
-#  - action: check_status_form
-#  - active_loop: check_status_form
-#  - slot_was_set:
-#    - requested_slot: report_id
-#  - active_loop: null
-#  - action: utter_confirm_id
-#  - action: check_status_db # id scorretto
-#  - action: utter_ask_other
-#  - intent: deny
-#  - action: utter_mood_great
-#  - intent: goodbye
-#  - action: utter_goodbye
 
 - story: ask help
   steps:
@@ -119,3 +92,67 @@ stories:
   - intent: deny
   - intent: goodbye
   - action: utter_goodbye
+  - action: action_restart
+
+# if wrong office (not in lookup) -> story with buttons
+- story: story_info_specific_offices
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: specific_office_info
+    entities:
+    - entity_name: specific_area
+  - action: get_specific_office_info
+  - action: utter_ask_other
+  - intent: deny
+  - intent: goodbye
+  - action: utter_goodbye
+  - action: action_restart
+
+
+- story: story_employee_info
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: employees_info
+  # - action: utter_ask_office
+  - action: employee_info_form
+  - active_loop: employee_info_form
+  - slot_was_set:
+    - requested_slot: office
+  - active_loop: null
+  - action: get_employees_info
+  - action: utter_ask_other
+  - intent: deny
+  - intent: goodbye
+  - action: utter_goodbye
+  - action: action_restart
+  
+
+# story info contacts and then other informations -> open days for offices
+- story: story_info_offices_contacts
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: office_info
+  # - action: utter_ask_office
+  - action: office_info_form
+  - active_loop: office_info_form
+  - slot_was_set:
+    - requested_slot: office
+  - active_loop: null
+  - action: get_office_info
+  - action: utter_ask_other
+  - intent: employees_info
+  # - action: utter_ask_office
+  - action: employee_info_form
+  - active_loop: employee_info_form
+  - slot_was_set:
+    - requested_slot: office
+  - active_loop: null
+  - action: get_employees_info
+  - action: utter_ask_other
+  - intent: deny
+  - intent: goodbye
+  - action: utter_goodbye
+  - action: action_restart

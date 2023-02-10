@@ -154,7 +154,7 @@ nlu:
     - voglio mandare un'email
     - ho bisogno di un numero di telefono
     - mi serve un indirizzo email
-    - con chi posso parlare?
+    - posso parlare con qualcuno?
 
 - intent: office_info
   examples: |
@@ -170,7 +170,16 @@ nlu:
     - mi dici gli orari?
     - quando posso passare in ufficio?
     - ho bisogno di venire da voi
-  #  - quali sono gli orari per l'ufficio edilizia?
+
+- intent: specific_office_info
+  examples: |
+    - quando è aperto l'ufficio per il [verde pubblico]{"entity": "specific_area"}?  
+    - dove si trova l'ufficio [edilizia]{"entity": "specific_area"}?
+    - quali sono gli orari dell’ufficio [edilizia]{"entity": "specific_area"}?
+    - quali sono gli orari dell'ufficio relativo a problemi di [pubblica illuminazione]{"entity": "specific_area"}?
+    - dov'è l'ufficio per problemi di [termoidraulica]{"entity": "specific_area"}?
+    - da chi posso andare per un problema riguardante la [viabilità]{"entity": "specific_area"}?
+
 
 - intent: help
   examples: |
@@ -290,14 +299,24 @@ nlu:
     - [lara.r@gmail.com](email)
 
 
-
-# - intent: choose_office
-#   examples: |
-  
-
-
-
 - synonym: segnalazione
   examples: |
     - problema
     - report
+
+- lookup: specific_area
+  examples: |
+    - verde pubblico
+    - Verde Pubblico
+    - verde
+    - pubblica illuminazione
+    - Pubblica Illuminazione
+    - illuminazione
+    - edilizia
+    - Edilizia
+    - viabilità
+    - Viabilità
+    - viabilita 
+    - termoidraulica
+    - Termoidraulica
+    - idraulica

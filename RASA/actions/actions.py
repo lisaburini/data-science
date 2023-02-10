@@ -15,7 +15,6 @@ import mysql.connector as sql
 from rasa_sdk.types import DomainDict
 from rasa_sdk.events import SlotSet
 #
-#
 
 ''' 
 class ActionHelloWorld(Action):
@@ -40,30 +39,6 @@ mydb = sql.connect(
         database = "chatbot"
         )
 cursor = mydb.cursor()
-
-# Action to validate id
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-from typing import Text, List, Any, Dict
-
-from rasa_sdk import Tracker, FormValidationAction
-from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.types import DomainDict
 
 
 class ValidateCheckStatusForm(FormValidationAction):
@@ -159,11 +134,82 @@ class GetOfficeInfo(Action):
         cursor.execute(query,(office,))
         result = cursor.fetchall()
 
-        dispatcher.utter_message(text=f"L'ufficio scelto è quello relativo a: {office}")
+        # intent = tracker.latest_message['intent'].get('name')
+        # intent = tracker.get_intent_of_latest_message(self)
+        #dispatcher.utter_message(text=f"intent={intent}")
 
+        # dispatcher.utter_message(text=f"L'ufficio scelto è quello relativo a: {office}")
         if len(result) == 0:
             dispatcher.utter_message("Abbiamo riscontrato un problema nel reperire le informazioni. Ci scusiamo e le chiediamo di riprovare più tardi.")
         else:
             dispatcher.utter_message(text=f"L'ufficio di riferimento per l'area {office} si trova in {result[0][9]} ed è aperto al pubblico nei giorni {result[0][10]}, nei seguenti orari: {result[0][11]}.")
+        # return [SlotSet("office", None)]
+        return []
         
-        return [SlotSet("office", None)]
+
+# Action to retrive information about a particular office
+class GetSpecificOfficeInfo(Action):
+    def name(self) -> Text:
+        return "get_specific_office_info"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict):
+
+        office=tracker.get_slot('specific_area')
+        office = str(office)
+        office = office.title()
+
+        if(office=='Verde'):
+            office = 'Verde Pubblico'
+        if(office=='Illuminazione'):
+            office = 'Pubblica Illuminazione'        
+        if(office=='Viabilita'):
+            office = 'Viabilità'
+        if(office=='Idraulica'):
+            office = 'Termoidraulica'
+
+        # query = 'SELECT Stato FROM Segnalazioni WHERE ID=%s'
+        query = 'SELECT * FROM Impiegato WHERE Settore=%s'
+
+        cursor.execute(query,(office,))
+        result = cursor.fetchall()
+
+        if len(result) == 0:
+            dispatcher.utter_message("L'area di riferimento da lei specificata non è corretta, la preghiamo di riprovare.")
+        else:
+            dispatcher.utter_message(text=f"L'ufficio di riferimento per l'area {office} si trova in {result[0][9]} ed è aperto al pubblico nei giorni {result[0][10]}, nei seguenti orari: {result[0][11]}.")
+        
+        # return [SlotSet("specific_area", None)]
+        return []
+    
+
+# Action to retrive information to speak with an operator
+class GetEmployeesInfo(Action):
+    def name(self) -> Text:
+        return "get_employees_info"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict):
+
+        # employee_area=tracker.get_slot('employee_area')
+        employee_area=tracker.get_slot('office')
+        query = 'SELECT * FROM Impiegato WHERE Settore=%s'
+
+        cursor.execute(query,(employee_area,))
+        result = cursor.fetchall()
+
+        # dispatcher.utter_message(text=f"L'ufficio scelto è quello relativo a: {employee_area}")
+
+        if len(result) == 0:
+            dispatcher.utter_message("Abbiamo riscontrato un problema nel reperire le informazioni. Ci scusiamo e le chiediamo di riprovare più tardi.")
+        else:
+            dispatcher.utter_message(text=f"La persona di riferimento per l'ufficio {employee_area} è {result[0][1]} {result[0][2]} e può essere contattata attraverso il numero {result[0][7]} oppure tramite l'email {result[0][8]}.")
+        
+        # return [SlotSet("office", None)]
+        return []

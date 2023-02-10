@@ -13,3 +13,6 @@ RASA/.rasa/cache/cache.db
 RASA/models/
 RASA/ngrok.exe
 RASA/passaggi_Lisa.rtf
+RASA/actions/__pycache__
+RASA/.rasa/cache/*
+RASA/.rasa/
