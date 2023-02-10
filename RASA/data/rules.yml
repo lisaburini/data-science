@@ -71,10 +71,11 @@ rules:
   - action: utter_insert_surname
 
 # rules for form to ask report id
+
 - rule: Activate form report id
   steps:
   - intent: check_status_report
-  - action: utter_ask_report_id
+  # - action: utter_ask_report_id
   - action: check_status_form
   - active_loop: check_status_form
 
@@ -86,8 +87,10 @@ rules:
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
-  - action: utter_confirm_id
+  # - action: utter_confirm_id
   - action: check_status_db
+  - action: utter_ask_other
+
 
 # rule for fallback
 - rule: Ask to rephrase
@@ -95,8 +98,24 @@ rules:
   - intent: nlu_fallback
   - action: utter_out_of_scope
 
+# rule to get office info
+- rule: Activate form office info
+  steps:
+  - intent: office_info
+  # - action: utter_ask_office
+  - action: office_info_form
+  - active_loop: office_info_form
 
-  
+- rule: Submit form
+  condition:
+  - active_loop: office_info_form
+  steps:
+  - action: office_info_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: get_office_info
+  - action: utter_ask_other
 
 
 

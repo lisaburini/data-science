@@ -35,11 +35,15 @@ entities:
   - phone_number
   - email
   - report_id
+  - office
 
 forms:
   check_status_form:
     required_slots:
       - report_id
+  office_info_form:
+    required_slots:
+      - office
 
 
 slots:
@@ -79,6 +83,7 @@ slots:
     mappings:
     - type: from_entity
       entity: email
+
   report_id:
     type: text
     influence_conversation: true
@@ -87,10 +92,15 @@ slots:
         conditions:
           - active_loop: check_status_form
             requested_slot: report_id
-  
-
-
-
+  office:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      conditions:
+          - active_loop: office_info_form
+            requested_slot: office
+        
   
 responses:
   
@@ -112,6 +122,7 @@ responses:
   
   utter_mood_great:
   - text: "Molto bene, sono soddisfatto per aver portato a termine il mio lavoro"
+  - text: "Sono contento di aver soddisfatto tutte le sue esigenze."
 
   utter_happy:
   - text: "Ne sono lieto. Scrivimi pure tutte le volte che ne hai bisogno"
@@ -121,18 +132,18 @@ responses:
   - text: "Sono un bot"
 
   utter_out_of_scope:
-  - text: "Scusami, non ho compreso le tue intenzioni. Ecco qui una lista delle attività di mia competenza:\n-Ricevere una segnalazione\n-Dare informazioni sullo stato di una segnalazione\n-Fornire informazioni inerenti al settore 'lavori pubblici'"
+  - text: "Scusami, non ho compreso le sue intenzioni. Ecco qui una lista delle attività di mia competenza:\n-Ricevere una segnalazione\n-Dare informazioni sullo stato di una segnalazione\n-Fornire informazioni inerenti al settore 'lavori pubblici'"
 
   utter_useful:
   - text: "Ho risposto correttamente alla tua domanda?"
   - text: "Ho fornito le informazioni richieste?"
 
   utter_attack:
-  - text: "I nostri operatori stanno facendo il possibile. Prova a ricontattarci a breve"
+  - text: "I nostri operatori stanno facendo il possibile. Provi a ricontattarci a breve."
 
   utter_employees_info:
-  - text: "Seleziona il settore di interesse:"
-  #bottoni con le categorie
+  - text: ""
+  # bottoni
 
   utter_insert_report:
   - text: "Bene: inserisci la descrizione della segnalazione"
@@ -154,7 +165,7 @@ responses:
   - text: "Il tuo cognome è {surname}"
 
   utter_ask_report_id:
-  - text: "Qual è l'id della segnalazione di cui vuoi controllare lo stato?"
+  - text: "Qual è l'id della segnalazione di cui vuole controllare lo stato?"
 
   utter_confirm_id:
   - text: "Perfetto. Ora controllerò lo stato della segnalazione numero {report_id}."
@@ -162,10 +173,34 @@ responses:
   utter_help:
   - text: "Ecco qui una lista delle attività di mia competenza:\n-Ricevere una segnalazione\n-Dare informazioni sullo stato di una segnalazione\n-Fornire informazioni inerenti al settore 'lavori pubblici'"
 
+  utter_ask_other:
+  - text: "Posso fare qualcos'altro per lei?"
+  - text: "Ha bisogno di altro?"
+
+  utter_ask_office:
+  - text: "Quale area del settore 'Lavori Pubblici' le interessa?"
+    buttons:
+    - title: "Edilizia"
+      # payload: /office_info{{"office":"Edilizia"}}
+      payload: Edilizia
+    - title: "Luce"
+      # payload: /office_info{{"office":"Pubblica Illuminazione"}}
+      payload: Pubblica Illuminazione
+    - title: "Idraulica"
+      # payload: /office_info{{"office":"Termoidraulica"}}
+      payload: Termoidraulica
+    - title: "Verde"
+      # payload: /office_info{{"office":"Verde Pubblico"}}
+      payload: Verde Pubblico
+    - title: "Viabilità"
+      # payload: /office_info{{"office":"Viabilità"}}
+      payload: Viabilità
 
 
 actions:
+  - validate_check_status_form
   - check_status_db
+  - get_office_info
 
 session_config:
   session_expiration_time: 60

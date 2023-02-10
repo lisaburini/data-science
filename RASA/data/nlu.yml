@@ -67,6 +67,7 @@ nlu:
     - è giusto
     - esatto
     - perfetto
+    - si, vorrei riprovare
 
 - intent: deny
   examples: |
@@ -81,6 +82,11 @@ nlu:
     - veramente no
     - proprio no
     - assolutamente no
+    - no grazie
+    - no, grazie
+    - sono apposto, grazie
+    - è tutto, grazie
+    - apposto così
 
 - intent: mood_great
   examples: |
@@ -134,6 +140,8 @@ nlu:
     - il mio problema è stato risolto?
     - il problema segnalato è stato preso in carico?
     - a che punto sono i lavori?
+    - vorrei riprovare ad inserire l'id
+    - vorrei controllare un'altra segnalazione
 
 - intent: employees_info
   examples: |
@@ -160,6 +168,9 @@ nlu:
     - in che giorni siete aperti?
     - quando posso venire?
     - mi dici gli orari?
+    - quando posso passare in ufficio?
+    - ho bisogno di venire da voi
+  #  - quali sono gli orari per l'ufficio edilizia?
 
 - intent: help
   examples: |
@@ -188,6 +199,7 @@ nlu:
     - non ho più niente da chiedere
     - ho concluso
     - ok grazie
+    - non voglio controllare altro
   
 - intent: out_of_scope
   examples: |
@@ -217,6 +229,7 @@ nlu:
     - muovetevi
     - non è possibile che ancora non avete risolto
 
+
 - intent: submit
   examples: |
     - invia
@@ -244,11 +257,6 @@ nlu:
     - annulla
     - voglio tornare indietro
     - cancella
-
-- synonym: segnalazione
-  examples: |
-    - problema
-    - report
   
 
 - intent: insert_description
@@ -280,3 +288,16 @@ nlu:
 - intent: insert_email
   examples: |
     - [lara.r@gmail.com](email)
+
+
+
+# - intent: choose_office
+#   examples: |
+  
+
+
+
+- synonym: segnalazione
+  examples: |
+    - problema
+    - report
