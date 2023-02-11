@@ -150,6 +150,7 @@ nlu:
     - a che punto sono i lavori?
     - vorrei riprovare ad inserire l'id
     - vorrei controllare un'altra segnalazione
+    - Vorrei informazioni sullo stato di una segnalazione
 
 - intent: employees_info
   examples: |
@@ -273,35 +274,7 @@ nlu:
     - cancella
   
 
-- intent: insert_description
-  examples: |
-    - [descrizione](description)
 
-- intent: insert_location
-  examples: |
-    - è successo in [Via Ancona 1](location)
-
-- intent: insert_name
-  examples: |
-    - mi chiamo [Anna](name)
-    - sono [Lisa](name)
-    - il mio nome è [Marco](name)
-  
-- intent: insert_surname
-  examples: |
-    - [Rossi](surname)
-    - è [Bianchi](surname)
-    - il mio cognome è [Verdi](surname)
-
-- intent: insert_phone_number
-  examples: |
-    - [3331112234](phone_number)
-    - è [3456789234](phone_number)
-
-
-- intent: insert_email
-  examples: |
-    - [lara.r@gmail.com](email)
 
 
 - intent: suggestion_proposal
