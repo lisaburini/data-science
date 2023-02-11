@@ -40,6 +40,7 @@ entities:
   - office
   - specific_area
   - employee_area
+  - confirm_button
 
 forms:
   check_status_form:
@@ -64,6 +65,9 @@ forms:
       - full_name
       - phone_number
       - email
+  ask_suggestion_form:
+    required_slots:
+      - confirm_button
 
 
 
@@ -159,6 +163,16 @@ slots:
           - active_loop: employee_info_form
             requested_slot: employee_area
   
+  confirm_button:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      conditions:
+          - active_loop: ask_suggestion_form
+            requested_slot: confirm_button
+
+  
 responses:
   
   utter_start:
@@ -166,13 +180,13 @@ responses:
 
   utter_greet:
   - text: "Salve, come posso aiutarti?"
-  - text: "Buongiorno, sono a tua disposizione."
+  - text: "Buongiorno, sono a sua disposizione."
 
   utter_goodbye:
   - text: "Arrivederci"
   - text: "Arrivederla"
   - text: "Buon proseguimento di giornata"
-  - text: "Grazie di averci contattato"
+  # - text: "Grazie di averci contattato"
 
   utter_mood_unhappy:
   - text: "Mi dispiace, spiegami meglio come posso esserti utile"
@@ -192,7 +206,7 @@ responses:
   - text: "Scusami, non ho compreso le sue intenzioni. Ecco qui una lista delle attività di mia competenza:\n-Ricevere una segnalazione\n-Dare informazioni sullo stato di una segnalazione\n-Fornire informazioni inerenti al settore 'lavori pubblici'"
 
   utter_useful:
-  - text: "Ho risposto correttamente alla tua domanda?"
+  - text: "Ho risposto correttamente alla sua domanda?"
   - text: "Ho fornito le informazioni richieste?"
 
   utter_attack:
@@ -214,12 +228,6 @@ responses:
 
   utter_not_submit:
   - text: "La segnalazione non è stata salvata."
-
-  utter_insert_name:
-  - text: "Il tuo nome è {name}"
-
-  utter_insert_surname:
-  - text: "Il tuo cognome è {surname}"
 
   utter_ask_report_id:
   - text: "Qual è l'id della segnalazione di cui vuole controllare lo stato?"
@@ -278,7 +286,15 @@ responses:
   - text: "Fornire l'indirizzo email"
   
   utter_ask_suggestion:
-  - text: "Inserisci qui la tua proposta"      
+  - text: "Inserisca qui la sua proposta"
+
+  utter_ask_confirm_button:
+  - text: "Grazie per averci contattato. Vuole proporre dei consigli per il settore 'Lavori Pubblici' al fine di migliorare il servizio offerto ai cittadini?"
+    buttons:
+    - title: "Sì"
+      payload: Sii
+    - title: "No"
+      payload: Noo
 
 
 actions:
@@ -289,6 +305,7 @@ actions:
   - get_employees_info
   - submit_report
   - submit_suggestion
+  - fill_slot
 
 
 session_config:

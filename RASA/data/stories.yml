@@ -8,9 +8,11 @@ stories:
   - action: utter_greet
   - intent: mood_great
   - action: utter_mood_great
-  - intent: goodbye
-  - action: utter_goodbye
-  - action: action_restart
+  #- intent: goodbye
+  #- action: utter_goodbye
+  #- action: ask_suggestion_form
+  #- action: action_restart
+  
 
 - story: sad_path1
   steps:
@@ -33,21 +35,6 @@ stories:
   # - intent: check_status_report
   # da finire
 
-
-
-
-# - story: confirm
-  # steps:
- 
-  # - intent: greet
-  # - action: utter_greet
-  # - intent: insert_report
-   #da completare
-  # - action: utter_ask_confirm
-  # - intent: submit
-  # - action: utter_submit
-
-
 - story: check_report_happy
   steps:
   - intent: greet
@@ -64,9 +51,11 @@ stories:
   - action: utter_ask_other
   - intent: deny
   - action: utter_mood_great
-  - intent: goodbye
-  - action: utter_goodbye
-  - action: action_restart
+  #- intent: goodbye
+  #- action: utter_goodbye
+  #- action: ask_suggestion_form
+  #- action: action_restart
+
   
 
 - story: ask help
@@ -90,9 +79,11 @@ stories:
   - action: get_office_info
   - action: utter_ask_other
   - intent: deny
-  - intent: goodbye
-  - action: utter_goodbye
-  - action: action_restart
+  #- intent: goodbye
+  #- action: utter_goodbye
+  #- action: ask_suggestion_form
+  #- action: action_restart
+
 
 # if wrong office (not in lookup) -> story with buttons
 - story: story_info_specific_offices
@@ -105,9 +96,11 @@ stories:
   - action: get_specific_office_info
   - action: utter_ask_other
   - intent: deny
-  - intent: goodbye
-  - action: utter_goodbye
-  - action: action_restart
+  #- intent: goodbye
+  #- action: utter_goodbye
+  #- action: ask_suggestion_form
+  #- action: action_restart
+ 
 
 
 - story: story_employee_info
@@ -124,10 +117,11 @@ stories:
   - action: get_employees_info
   - action: utter_ask_other
   - intent: deny
-  - intent: goodbye
-  - action: utter_goodbye
-  - action: action_restart
-  
+  #- intent: goodbye
+  #- action: utter_goodbye
+  #- action: ask_suggestion_form
+  #- action: action_restart
+ 
 
 # story info contacts and then other informations -> open days for offices
 - story: story_info_offices_contacts
@@ -153,9 +147,10 @@ stories:
   - action: get_employees_info
   - action: utter_ask_other
   - intent: deny
-  - intent: goodbye
-  - action: utter_goodbye
-  - action: action_restart
+  # - intent: goodbye
+  #- action: utter_goodbye
+  #- action: ask_suggestion_form
+  #- action: action_restart
 
 
 - story: insert a report 

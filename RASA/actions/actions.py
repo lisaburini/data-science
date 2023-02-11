@@ -57,9 +57,6 @@ class ValidateCheckStatusForm(FormValidationAction):
             report_id_list.append(str(row[0]))
         return report_id_list
     
-    ((1,),(2,),)
-    ['1','2','3']
-
     def validate_report_id(
         self,
         slot_value: Any,
@@ -243,7 +240,7 @@ class InsertReportInDB(Action):
         try:
             cursor.execute(query, (today,description,location,full_name,phone_number,email,tool,status))
             mydb.commit()
-            dispatcher.utter_message(text="La tua segnalazione è stata registrata con successo")
+            dispatcher.utter_message(text="La sua segnalazione è stata registrata con successo")
         except:
             dispatcher.utter_message(text="Si è verificato un errore")
 
@@ -259,8 +256,7 @@ class InsertSuggestionInDB(Action):
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: DomainDict):
-
-        
+       
         today = date.today()
         suggestion =tracker.get_slot('suggestion')
         full_name =tracker.get_slot('full_name')
@@ -268,16 +264,41 @@ class InsertSuggestionInDB(Action):
         email = tracker.get_slot('email')
         tool_used = 'Chatbot'
 
+        if(suggestion=='NULL' and full_name=='NULL' and phone_number=='NULL' and email=='NULL'):
+            dispatcher.utter_message(text="La chat è terminata")
+            return []
+        else:
+            query = 'INSERT INTO raccoltaconsigli (DescrizioneConsiglio, Proponente, TelefonoProponente, EmailProponente, DataProposta, MezzoProposta) VALUES (%s,%s,%s,%s,%s,%s);'
+            try:
+                cursor.execute(query, (suggestion,full_name,phone_number,email,today,tool_used))
+                mydb.commit()
+                dispatcher.utter_message(text="Grazie, il suo suggerimento è stato registrato con successo")
+                dispatcher.utter_message(text="La chat è terminata")
+            except:
+                dispatcher.utter_message(text="Si è verificato un errore")
+            return []
 
-        query = 'INSERT INTO raccoltaconsigli (DescrizioneConsiglio, Proponente, TelefonoProponente, EmailProponente, DataProposta, MezzoProposta) VALUES (%s,%s,%s,%s,%s,%s);'
 
-    
-        try:
-            cursor.execute(query, (suggestion,full_name,phone_number,email,today,tool_used))
-            mydb.commit()
-            dispatcher.utter_message(text="Il tuo suggerimento è stato registrato con successo")
-        except:
-            dispatcher.utter_message(text="Si è verificato un errore")
-            
+# Action to retrive information to speak with an operator
+class GetIntentsSuggestion(Action):
+    def name(self) -> Text:
+        return "fill_slot"
 
-        return []
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict):
+
+        confirm_button=tracker.get_slot('confirm_button')
+        # dispatcher.utter_message(text=f"è partita l'azione dopo il clic dei bottoni e il botton scelto è {confirm_button}")
+
+        if (confirm_button == 'Noo'):
+            return [SlotSet("suggestion", 'NULL'), SlotSet("full_name", 'NULL'), SlotSet("phone_number", 'NULL'), SlotSet("email", 'NULL')]
+        
+        else: 
+            return []
+
+        # dispatcher.utter_message(text=f"L'ufficio scelto è quello relativo a: {employee_area}")
+        # return [SlotSet("office", None)]
+        

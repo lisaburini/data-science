@@ -32,6 +32,8 @@ nlu:
  
 - intent: goodbye
   examples: |
+    - no, arrivederci
+    - no grazie, arrivederci
     - bye
     - byee
     - bye bye
@@ -275,17 +277,15 @@ nlu:
   
 
 
-
-
-- intent: suggestion_proposal
-  examples: |
-    - Va bene, vorrei fare una proposta
-    - Sì, ho un consiglio da inserire
-    - Voglio inserire un consiglio
-    - esatto, vorrei fare una proposta
-    - ok inserisco una proposta
-    - proposta
-    - suggerimento
+# - intent: suggestion_proposal
+#  examples: |
+#    - Va bene, vorrei fare una proposta
+#    - Sì, ho un consiglio da inserire
+#    - Voglio inserire un consiglio
+#    - esatto, vorrei fare una proposta
+#    - ok inserisco una proposta
+#    - proposta
+#    - suggerimento
 
 
 - synonym: segnalazione

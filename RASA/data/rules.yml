@@ -7,11 +7,13 @@ rules:
   - intent: start
   - action: utter_start
 
-- rule: Say goodbye anytime the user says goodbye
-  steps:
-  - intent: goodbye
-  - action: utter_goodbye
-  - action: action_restart
+#- rule: Say goodbye anytime the user says goodbye
+#  steps:
+#  - intent: goodbye
+#  - action: utter_goodbye
+#  - action: ask_suggestion_form
+#  - active_loop: ask_suggestion_form
+  # - action: action_restart
 
 - rule: Say 'I am a bot' anytime the user challenges
   steps:
@@ -51,16 +53,6 @@ rules:
   - action: utter_out_of_scope
 
 
-- rule: name ok
-  steps:
-  - intent: insert_name
-  - action: utter_insert_name
-
-
-- rule: surname ok
-  steps:
-  - intent: insert_surname
-  - action: utter_insert_surname
 
 # rules for form to ask report id
 
@@ -128,7 +120,7 @@ rules:
   - action: employee_info_form
   - active_loop: employee_info_form
 
-- rule: Submit form
+- rule: Submit form employee info
   condition:
   - active_loop: employee_info_form
   steps:
@@ -173,11 +165,31 @@ rules:
   - action: utter_ask_confirm
 
 
-- rule: insert a suggestion
+# buttons to continue for suggestion insert (yes/no)
+- rule: ask to insert a suggestion
   steps:
-  - intent: suggestion_proposal
-  #- action: utter_ask_suggestion
+  # - action: utter_ask_confirm_button
+  - intent: goodbye
+  - action: utter_goodbye
+  - action: ask_suggestion_form
+  - active_loop: ask_suggestion_form
+
+- rule: Submit form ask to insert a suggestion
+  condition:
+  - active_loop: ask_suggestion_form
+  steps:
+  - action: ask_suggestion_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # wait_for_user_input: false
+  - action: fill_slot
   - action: insert_suggestion
+#- rule: insert a suggestion
+#  steps:
+  #- intent: suggestion_proposal
+  #- action: utter_ask_suggestion
+#  - action: insert_suggestion
   - active_loop: insert_suggestion
   - slot_was_set:
     - requested_slot: suggestion
@@ -192,6 +204,7 @@ rules:
     - requested_slot: email
   - active_loop: null
   - action: submit_suggestion
+  - action: action_restart
 
 
 - rule: submitOK
