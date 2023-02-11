@@ -45,11 +45,6 @@ rules:
   - intent: not_submit
   - action: utter_not_submit
 
-- rule: ask
-  steps:
-  - intent: insert_report
-  - action: utter_ask_confirm
-
 - rule: specify the domain of the bot
   steps:
   - intent: out_of_scope
@@ -145,3 +140,74 @@ rules:
   - action: get_employees_info
   # - action: get_employees_info
   - action: utter_ask_other
+
+
+
+- rule: start report
+  steps:
+  - intent: insert_report
+  - action: insert_info_in_report
+  - active_loop: insert_info_in_report
+
+- rule: compile report
+  steps:
+  - intent: insert_report
+  #- action: utter_ask_description
+  - action: insert_info_in_report
+  - active_loop: insert_info_in_report
+  - slot_was_set:
+    - requested_slot: description
+ # - action: utter_location
+  - slot_was_set:
+    - requested_slot: location
+#  - action: utter_full_name
+  - slot_was_set:
+    - requested_slot: full_name
+ # - action: utter_phone_number
+  - slot_was_set:
+    - requested_slot: phone_number
+ # - action: utter_email
+  - slot_was_set:
+    - requested_slot: email
+  - active_loop: null
+  - action: utter_ask_confirm
+
+
+- rule: insert a suggestion
+  steps:
+  - intent: suggestion_proposal
+  #- action: utter_ask_suggestion
+  - action: insert_suggestion
+  - active_loop: insert_suggestion
+  - slot_was_set:
+    - requested_slot: suggestion
+#  - action: utter_full_name
+  - slot_was_set:
+    - requested_slot: full_name
+ # - action: utter_phone_number
+  - slot_was_set:
+    - requested_slot: phone_number
+ # - action: utter_email
+  - slot_was_set:
+    - requested_slot: email
+  - active_loop: null
+  - action: submit_suggestion
+
+
+- rule: submitOK
+  condition:
+  - active_loop: insert_info_in_report
+  steps:
+    - action: insert_info_in_report
+    - active_loop: null
+    - slot_was_set:
+      - requested_slot: null
+    - action: utter_ask_confirm
+    - intent: submit
+    - action: submit_report
+
+
+- rule: submitNO
+  steps:
+    - intent: not_submit
+    - action: utter_not_submit

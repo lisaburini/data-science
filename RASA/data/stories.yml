@@ -156,3 +156,37 @@ stories:
   - intent: goodbye
   - action: utter_goodbye
   - action: action_restart
+
+
+- story: insert a report 
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: insert_report
+  #- action: utter_ask_description
+  - action: insert_info_in_report
+  - active_loop: insert_info_in_report
+  - slot_was_set:
+    - requested_slot: description
+
+ # - action: utter_location
+  - slot_was_set:
+    - requested_slot: location
+
+
+ # - action: utter_full_name
+  - slot_was_set:
+    - requested_slot: full_name
+
+ # - action: utter_phone_number
+  - slot_was_set:
+    - requested_slot: phone_number
+
+#- action: utter_email
+  - slot_was_set:
+    - requested_slot: email
+  - active_loop: null
+
+  - action: utter_ask_confirm
+  - intent: submit
+  - action: submit_report

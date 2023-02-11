@@ -26,13 +26,14 @@ intents:
   - insert_email
   - insert_description
   - insert_location
+  - suggestion_proposal
   
 
 entities:
+  - suggestion
   - description
   - location
-  - name
-  - surname
+  - full_name
   - phone_number
   - email
   - report_id
@@ -50,6 +51,21 @@ forms:
   employee_info_form:
     required_slots:
       - office
+  insert_info_in_report:
+    required_slots:
+      - description
+      - location
+      - full_name
+      - phone_number
+      - email
+  insert_suggestion:
+    required_slots:
+      - suggestion
+      - full_name
+      - phone_number
+      - email
+
+
 
 
 slots:
@@ -57,38 +73,56 @@ slots:
     type: text
     influence_conversation: true
     mappings:
-    - type: from_entity
-      entity: description
+      - type: from_text
+        conditions:
+          - active_loop: insert_info_in_report
+            requested_slot: description
   location:
     type: text
     influence_conversation: true
     mappings:
-    - type: from_entity
-      entity: location
-  name:
+      - type: from_text
+        conditions:
+          - active_loop: insert_info_in_report
+            requested_slot: location
+  full_name:
     type: text
     influence_conversation: true
     mappings:
-    - type: from_entity
-      entity: name
-  surname:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: surname
+      - type: from_text
+        conditions:
+          - active_loop: insert_info_in_report
+            requested_slot: full_name
+          - active_loop: insert_suggestion
+            requested_slot: full_name
   phone_number:
     type: text
     influence_conversation: true
     mappings:
-    - type: from_entity
-      entity: phone_number
+      - type: from_text
+        conditions:
+          - active_loop: insert_info_in_report
+            requested_slot: phone_number
+          - active_loop: insert_suggestion
+            requested_slot: phone_number
   email:
     type: text
     influence_conversation: true
     mappings:
-    - type: from_entity
-      entity: email
+      - type: from_text
+        conditions:
+          - active_loop: insert_info_in_report
+            requested_slot: email
+          - active_loop: insert_suggestion
+            requested_slot: email
+  suggestion:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: insert_suggestion
+            requested_slot: suggestion
 
   report_id:
     type: text
@@ -226,7 +260,25 @@ responses:
     - title: "Verde"
       payload: Verde Pubblico
     - title: "Viabilità"
-      payload: Viabilità      
+      payload: Viabilità
+
+  utter_ask_description:
+  - text: "Inserire l'oggetto della segnalazione:"
+
+  utter_ask_location:
+  - text: "Inserire la località della segnalazione:"
+
+  utter_ask_full_name:
+  - text: "Inserire il nominativo completo del segnalatore"
+
+  utter_ask_phone_number:
+  - text: "Fornire un recapito telefonico"
+
+  utter_ask_email:
+  - text: "Fornire l'indirizzo email"
+  
+  utter_ask_suggestion:
+  - text: "Inserisci qui la tua proposta"      
 
 
 actions:
@@ -235,6 +287,8 @@ actions:
   - get_office_info
   - get_specific_office_info
   - get_employees_info
+  - submit_report
+  - submit_suggestion
 
 
 session_config:

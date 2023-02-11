@@ -68,6 +68,10 @@ nlu:
     - esatto
     - perfetto
     - si, vorrei riprovare
+    - si grazie
+    - sì, grazie
+    - sì perfavore
+    - sì per favore
 
 - intent: deny
   examples: |
@@ -126,7 +130,11 @@ nlu:
 - intent: insert_report
   examples: |
     - vorrei fare una segnalazione
+    - voglio fare una segnalazione
+    - vorrei inserire una segnalazione
+    - voglio inserire una segnalazione
     - vorrei comunicare un problema
+    - voglio comunicare un problema
     - c'è un problema
     - dovete intervenire
     - vi segnalo che
@@ -241,23 +249,20 @@ nlu:
 
 - intent: submit
   examples: |
+    - sì, invia
+    - si, puoi inviare
     - invia
     - confermo la segnalazione
     - i dati sono corretti
     - vorrei inviare la segnalazione
     - sì, confermo e invio
-    - sì
-    - si
-    - yes
     - confermo tutto
-    - si grazie
-    - sì, grazie
-    - sì perfavore
-    - sì per favore
+
 
 - intent: not_submit
   examples: |
-    - no
+    - no, ho sbagliato
+    - no, ho sbagliato ad inserire in dati
     - annulla la segnalazione
     - i dati sono errati, voglio annullare
     - ho sbagliato
@@ -297,6 +302,17 @@ nlu:
 - intent: insert_email
   examples: |
     - [lara.r@gmail.com](email)
+
+
+- intent: suggestion_proposal
+  examples: |
+    - Va bene, vorrei fare una proposta
+    - Sì, ho un consiglio da inserire
+    - Voglio inserire un consiglio
+    - esatto, vorrei fare una proposta
+    - ok inserisco una proposta
+    - proposta
+    - suggerimento
 
 
 - synonym: segnalazione

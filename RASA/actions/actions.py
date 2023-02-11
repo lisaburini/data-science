@@ -14,6 +14,7 @@ from rasa_sdk.executor import CollectingDispatcher
 import mysql.connector as sql
 from rasa_sdk.types import DomainDict
 from rasa_sdk.events import SlotSet
+from datetime import date
 #
 
 ''' 
@@ -55,7 +56,9 @@ class ValidateCheckStatusForm(FormValidationAction):
         for row in result:
             report_id_list.append(str(row[0]))
         return report_id_list
-  
+    
+    ((1,),(2,),)
+    ['1','2','3']
 
     def validate_report_id(
         self,
@@ -212,4 +215,69 @@ class GetEmployeesInfo(Action):
             dispatcher.utter_message(text=f"La persona di riferimento per l'ufficio {employee_area} è {result[0][1]} {result[0][2]} e può essere contattata attraverso il numero {result[0][7]} oppure tramite l'email {result[0][8]}.")
         
         # return [SlotSet("office", None)]
+        return []
+
+
+class InsertReportInDB(Action):
+    def name(self) -> Text:
+        return "submit_report"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict):
+
+        
+        today = date.today()
+        description =tracker.get_slot('description')
+        location = tracker.get_slot('location')
+        full_name =tracker.get_slot('full_name')
+        phone_number =tracker.get_slot('phone_number')
+        email = tracker.get_slot('email')
+        tool = 'Chatbot'
+        status = 'In coda'
+
+        query = 'INSERT INTO segnalazioni (DataSegnalazione, Oggetto, Località, Segnalatore, TelefonoSegnalatore, EmailSegnalatore, MezzoSegnalazione, Stato) VALUES (%s,%s,%s,%s,%s,%s,%s,%s);'
+  
+        try:
+            cursor.execute(query, (today,description,location,full_name,phone_number,email,tool,status))
+            mydb.commit()
+            dispatcher.utter_message(text="La tua segnalazione è stata registrata con successo")
+        except:
+            dispatcher.utter_message(text="Si è verificato un errore")
+
+        return []
+
+
+class InsertSuggestionInDB(Action):
+    def name(self) -> Text:
+        return "submit_suggestion"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict):
+
+        
+        today = date.today()
+        suggestion =tracker.get_slot('suggestion')
+        full_name =tracker.get_slot('full_name')
+        phone_number =tracker.get_slot('phone_number')
+        email = tracker.get_slot('email')
+        tool_used = 'Chatbot'
+
+
+        query = 'INSERT INTO raccoltaconsigli (DescrizioneConsiglio, Proponente, TelefonoProponente, EmailProponente, DataProposta, MezzoProposta) VALUES (%s,%s,%s,%s,%s,%s);'
+
+    
+        try:
+            cursor.execute(query, (suggestion,full_name,phone_number,email,today,tool_used))
+            mydb.commit()
+            dispatcher.utter_message(text="Il tuo suggerimento è stato registrato con successo")
+        except:
+            dispatcher.utter_message(text="Si è verificato un errore")
+            
+
         return []
