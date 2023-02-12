@@ -92,28 +92,40 @@ class GetStatusFromDB(Action):
         domain: DomainDict):
 
         report_id=tracker.get_slot('report_id')
-        # query = 'SELECT Stato FROM Segnalazioni WHERE ID=%s'
+        # query = 'SELECT Stato FROM Segnalazioni WHERE ID=%s'           
 
         if(report_id == 'stop'):
             return [SlotSet("report_id", None)]
         else:
-            query = 'SELECT * FROM Segnalazioni WHERE ID=%s'
+            try:
+                query = 'SELECT * FROM Segnalazioni WHERE ID=%s'
 
-            cursor.execute(query,(report_id,))
-            result = cursor.fetchall()
-            if len(result) == 0:
-                dispatcher.utter_message("Non esiste alcuna segnalazione con questo ID!")
-            else:
-                if(str(result[0][8]) == 'in coda'):
-                    dispatcher.utter_message(text=f"La segnalazione numero {report_id} del giorno {result[0][1]}, con oggetto '{result[0][2]}' presso '{result[0][3]}' è in questo stato: {result[0][8]}.")
-                    dispatcher.utter_message(text=f"Ci dispiace non aver ancora potuto prendere in considerazione questa segnalazione. Stiamo facendo il possibile.")
-                elif(str(result[0][8]) == 'in corso'):
-                    dispatcher.utter_message(text=f"La segnalazione numero {report_id} del giorno {result[0][1]}, con oggetto '{result[0][2]}' presso '{result[0][3]}' è in questo stato: {result[0][8]}.")
-                    dispatcher.utter_message(text=f"Il problema è stato preso in carico in data {result[0][9]}, i nostri operai stanno lavorando per risolverlo il prima possibile.")
-                elif(str(result[0][8]) == 'espletata'):
-                    dispatcher.utter_message(text=f"La segnalazione numero {report_id} del giorno {result[0][1]}, con oggetto '{result[0][2]}' presso '{result[0][3]}' è in questo stato: {result[0][8]}.")
-                    dispatcher.utter_message(text=f"Siamo felici di informarla che i problemi evidenziati nella segnalazione {report_id} sono stati risolti. L'intervento è stato iniziato in data {result[0][9]} ed è stato concluso in data {result[0][10]}.")
-            return [SlotSet("report_id", None)]
+                cursor.execute(query,(report_id,))
+                result = cursor.fetchall()
+
+                if len(result) == 0:
+                    dispatcher.utter_message("Non esiste alcuna segnalazione con questo ID!")
+                    return [SlotSet("report_id", None)]
+                else:
+                    if(str(result[0][8]) == 'in coda'):
+                        dispatcher.utter_message(text=f"La segnalazione numero {report_id} del giorno {result[0][1]}, con oggetto '{result[0][2]}' presso '{result[0][3]}' è in questo stato: {result[0][8]}.")
+                        dispatcher.utter_message(text=f"Ci dispiace non aver ancora potuto prendere in considerazione questa segnalazione. Stiamo facendo il possibile.")
+                        return [SlotSet("report_id", None)]
+                    elif(str(result[0][8]) == 'in corso'):
+                        dispatcher.utter_message(text=f"La segnalazione numero {report_id} del giorno {result[0][1]}, con oggetto '{result[0][2]}' presso '{result[0][3]}' è in questo stato: {result[0][8]}.")
+                        dispatcher.utter_message(text=f"Il problema è stato preso in carico in data {result[0][9]}, i nostri operai stanno lavorando per risolverlo il prima possibile.")
+                        return [SlotSet("report_id", None)]
+                    elif(str(result[0][8]) == 'espletata'):
+                        dispatcher.utter_message(text=f"La segnalazione numero {report_id} del giorno {result[0][1]}, con oggetto '{result[0][2]}' presso '{result[0][3]}' è in questo stato: {result[0][8]}.")
+                        dispatcher.utter_message(text=f"Siamo felici di informarla che i problemi evidenziati nella segnalazione {report_id} sono stati risolti. L'intervento è stato iniziato in data {result[0][9]} ed è stato concluso in data {result[0][10]}.")
+                        return [SlotSet("report_id", None)]
+                
+                return [SlotSet("report_id", None)]
+
+            except:
+                dispatcher.utter_message(text=f"Si è verificato un errore. Non siamo riusciti a reperire le informazioni per la segnalazione numero {report_id}")
+                return [SlotSet("report_id", None)]
+
 
 # Action to retrive information about a particular office
 class GetOfficeInfo(Action):
@@ -233,14 +245,20 @@ class InsertReportInDB(Action):
         phone_number =tracker.get_slot('phone_number')
         email = tracker.get_slot('email')
         tool = 'Chatbot'
-        status = 'In coda'
+        status = 'in coda'
 
         query = 'INSERT INTO segnalazioni (DataSegnalazione, Oggetto, Località, Segnalatore, TelefonoSegnalatore, EmailSegnalatore, MezzoSegnalazione, Stato) VALUES (%s,%s,%s,%s,%s,%s,%s,%s);'
   
         try:
             cursor.execute(query, (today,description,location,full_name,phone_number,email,tool,status))
             mydb.commit()
-            dispatcher.utter_message(text="La sua segnalazione è stata registrata con successo")
+
+            # get id of last report inserted
+            query = 'SELECT ID FROM Segnalazioni ORDER BY ID DESC LIMIT 1'
+            cursor.execute(query)
+            id = cursor.fetchall()
+
+            dispatcher.utter_message(text=f"La sua segnalazione è stata registrata con successo. L'ID di riferimento per la sua segnalazione è {id[0][0]}")
         except:
             dispatcher.utter_message(text="Si è verificato un errore")
 
