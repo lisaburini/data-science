@@ -15,6 +15,7 @@ import mysql.connector as sql
 from rasa_sdk.types import DomainDict
 from rasa_sdk.events import SlotSet
 from datetime import date
+import re
 #
 
 ''' 
@@ -262,7 +263,7 @@ class InsertReportInDB(Action):
         except:
             dispatcher.utter_message(text="Si è verificato un errore")
 
-        return []
+        return [SlotSet("description", None), SlotSet("location", None)]
 
 
 class InsertSuggestionInDB(Action):
@@ -297,6 +298,31 @@ class InsertSuggestionInDB(Action):
             return []
 
 
+class ValidateInsertReportForm(FormValidationAction):
+    def name(self) -> Text:
+        return "validate_insert_info_in_report"
+    def validate_email(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        """Validate email value."""
+        # regex = "^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-z]{1,3}$"
+        regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+
+        # if re.match(regex, slot_value):
+        if (re.fullmatch(regex, slot_value)):
+            # validation succeeded, set the value of the "email" slot to value
+            return {"email": slot_value}
+        else:
+            # validation failed, set this slot to None so that the
+            # user will be asked for the slot again
+            dispatcher.utter_message(text=f"L'email inserita non ha una formattazione valida. Si prega di riprovare.")
+            return {"email": None}
+
+
 # Action to retrive information to speak with an operator
 class GetIntentsSuggestion(Action):
     def name(self) -> Text:
@@ -319,4 +345,27 @@ class GetIntentsSuggestion(Action):
 
         # dispatcher.utter_message(text=f"L'ufficio scelto è quello relativo a: {employee_area}")
         # return [SlotSet("office", None)]
-        
+
+class ValidateInsertSuggestionForm(FormValidationAction):
+    def name(self) -> Text:
+        return "validate_insert_suggestion"
+    def validate_email(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        """Validate email value."""
+        # regex = "^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-z]{1,3}$"
+        regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+
+        # if re.match(regex, slot_value):
+        if (re.fullmatch(regex, slot_value)):
+            # validation succeeded, set the value of the "email" slot to value
+            return {"email": slot_value}
+        else:
+            # validation failed, set this slot to None so that the
+            # user will be asked for the slot again
+            dispatcher.utter_message(text=f"L'email inserita non ha una formattazione valida. Si prega di riprovare.")
+            return {"email": None}

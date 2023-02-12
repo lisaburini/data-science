@@ -306,6 +306,8 @@ actions:
   - submit_report
   - submit_suggestion
   - fill_slot
+  - validate_insert_info_in_report
+  - validate_insert_suggestion
 
 
 session_config:
