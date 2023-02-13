@@ -360,8 +360,9 @@ class ValidateInsertSuggestionForm(FormValidationAction):
         # regex = "^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-z]{1,3}$"
         regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
 
+        
         # if re.match(regex, slot_value):
-        if (re.fullmatch(regex, slot_value)):
+        if (re.fullmatch(regex, slot_value) or slot_value=='NULL'):
             # validation succeeded, set the value of the "email" slot to value
             return {"email": slot_value}
         else:
