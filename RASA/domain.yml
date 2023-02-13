@@ -203,7 +203,7 @@ responses:
   - text: "Sono un bot"
 
   utter_out_of_scope:
-  - text: "Scusami, non ho compreso le sue intenzioni. Ecco qui una lista delle attività di mia competenza:\n-Ricevere una segnalazione\n-Dare informazioni sullo stato di una segnalazione\n-Fornire informazioni inerenti al settore 'lavori pubblici'"
+  - text: "Scusami, non ho compreso le sue intenzioni. Ecco qui una lista delle attività di mia competenza:\n-Ricevere una segnalazione\n-Dare informazioni sullo stato di una segnalazione\n-Fornire informazioni inerenti al settore 'Lavori Pubblici', come orari di apertura al pubblico e contatti di riferimento"
 
   utter_useful:
   - text: "Ho risposto correttamente alla sua domanda?"
@@ -236,7 +236,7 @@ responses:
   # - text: "Perfetto. Ora controllerò lo stato della segnalazione numero {report_id}."
 
   utter_help:
-  - text: "Ecco qui una lista delle attività di mia competenza:\n-Ricevere una segnalazione\n-Dare informazioni sullo stato di una segnalazione\n-Fornire informazioni inerenti al settore 'lavori pubblici'"
+  - text: "Ecco qui una lista delle attività di mia competenza:\n-Ricevere una segnalazione\n-Dare informazioni sullo stato di una segnalazione\n-Fornire informazioni inerenti al settore 'Lavori Pubblici', come orari di apertura al pubblico e contatti di riferimento"
 
   utter_ask_other:
   - text: "Posso fare qualcos'altro per lei?"
