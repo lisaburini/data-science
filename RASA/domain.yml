@@ -203,6 +203,9 @@ responses:
   - text: "Sono un bot"
 
   utter_out_of_scope:
+  - text: "Mi dispiace, la sua richiesta non può essere soddisfatta. Ecco qui una lista delle attività di mia competenza:\n-Ricevere una segnalazione\n-Dare informazioni sullo stato di una segnalazione\n-Fornire informazioni inerenti al settore 'Lavori Pubblici', come orari di apertura al pubblico e contatti di riferimento"
+
+  utter_fallback:
   - text: "Scusami, non ho compreso le sue intenzioni. Ecco qui una lista delle attività di mia competenza:\n-Ricevere una segnalazione\n-Dare informazioni sullo stato di una segnalazione\n-Fornire informazioni inerenti al settore 'Lavori Pubblici', come orari di apertura al pubblico e contatti di riferimento"
 
   utter_useful:

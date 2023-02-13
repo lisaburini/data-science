@@ -223,19 +223,8 @@ nlu:
   
 - intent: out_of_scope
   examples: |
-    - blablabla
-    - sadasdasdasd
-    - hmmmmm
-    - hahahahhaha
-    - i'm sleeping
+    - ho sonno
     - che tempo fa oggi?
-    - aeijfpvefvkèdlv
-    - lmlmlmlm
-    - uecwjeèqrpo
-    - aaaaaaaaaaaa
-    - pppppppppp
-    - kkkkkkk
-    - smdcspkèsj
     - ho voglia di chiacchierare un po'
     - come stai?
     - raccontami una barzelletta

@@ -80,7 +80,7 @@ rules:
 - rule: Ask to rephrase
   steps:
   - intent: nlu_fallback
-  - action: utter_out_of_scope
+  - action: utter_fallback
 
 # rule to get office info
 - rule: Activate form office info
