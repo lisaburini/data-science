@@ -179,6 +179,7 @@ class GetSpecificOfficeInfo(Action):
             office = 'Verde Pubblico'
         if(office=='Illuminazione'):
             office = 'Pubblica Illuminazione'        
+
         if(office=='Viabilita'):
             office = 'Viabilità'
         if(office=='Idraulica'):
@@ -196,7 +197,7 @@ class GetSpecificOfficeInfo(Action):
             dispatcher.utter_message(text=f"L'ufficio di riferimento per l'area {office} si trova in {result[0][9]} ed è aperto al pubblico nei giorni {result[0][10]}, nei seguenti orari: {result[0][11]}.")
         
         # return [SlotSet("specific_area", None)]
-        return []
+        return [SlotSet("office", office)]
     
 
 # Action to retrive information to speak with an operator
@@ -354,7 +355,8 @@ class ValidateInsertSuggestionForm(FormValidationAction):
         slot_value: Any,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
-        domain: DomainDict,
+        domai
+        : DomainDict,
     ) -> Dict[Text, Any]:
         """Validate email value."""
         # regex = "^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-z]{1,3}$"
