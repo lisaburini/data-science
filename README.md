@@ -10,5 +10,7 @@ This path contains code to execute machine learning tasks like classification, c
 # Network X
 
 # RASA
+This folder contains the implementation of a chatbot with the goal to help citizens of a small town to report and communicate problems to the Municipality.
 
 # BERT
+We used the pre-trained model BERT-base for Sentiment Analysis task. The fine-tuning is done with a film reviews dataset where all the reviews are labelled as "negative" or "positive".
