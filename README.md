@@ -8,6 +8,7 @@ Dataset is publicly available [here](https://www.kaggle.com/datasets/sobhanmoosa
 This path contains code to execute machine learning tasks like classification, clustering and time series analysis.
 
 # Network X
+This folder contains the analysis of a social network created from internal email communications between members of a large European research institute
 
 # RASA
 This folder contains the implementation of a chatbot with the goal to help citizens of a small town to report and communicate problems to the Municipality.
